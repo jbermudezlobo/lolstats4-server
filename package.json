@@ -1,0 +1,32 @@
+{
+  "name": "lolstats4-server",
+  "version": "1.0.0",
+  "description": "LOL Stats v4 server-side",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "pm2": "pm2 start server.js",
+    "pm2stop": "pm2 stop all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbermudezlobo/lolstats4-server.git"
+  },
+  "author": "Javier Bermúdez Lobo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbermudezlobo/lolstats4-server/issues"
+  },
+  "homepage": "https://github.com/jbermudezlobo/lolstats4-server#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.19",
+    "path": "^0.12.7",
+    "superagent": "^2.0.0-alpha.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2",
+    "pm2": "^1.1.3"
+  }
+}
