@@ -20,7 +20,8 @@
   "homepage": "https://github.com/jbermudezlobo/lolstats4-server#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "leagueapi": "^0.4.20"
   },
   "devDependencies": {
     "nodemon": "^1.9.2",
