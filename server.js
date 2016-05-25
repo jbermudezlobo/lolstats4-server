@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require("body-parser");
 var getkey = require('./data/apikeys');
 var api = require('leagueapi');
+var _ = require('lodash');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ "extended" : false }));
@@ -35,17 +36,20 @@ app.get('/stats/:server/:id', function (req, res) {
 
   Promise.all(requests)
   .then(function (_data) {
+    // var champs = [];
+    // _data[1].forEach(function (element) { champs.push({ championId: element.championId, championPoints: element.championPoints }); });
+    var champs = _.map(_data[1], function (elm) { return ({ championId: elm.championId, championPoints: elm.championPoints }); });
     result.stats.name = _data[0][id][0].entries[0].playerOrTeamName;
     result.stats.tier = _data[0][id][0].tier;
     result.stats.division = _data[0][id][0].entries[0].division;
     result.stats.points = _data[0][id][0].entries[0].leaguePoints;
     result.stats.wins = _data[0][id][0].entries[0].wins;
     result.stats.losses = _data[0][id][0].entries[0].losses;
-    result.stats.champs = _data[1];
+    result.stats.champs = champs;
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.json(result);
   }, function (error) {
-    res.json({ error: true });
+    res.json({ error: true, message: error });
   });
 
 });

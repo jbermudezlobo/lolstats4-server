@@ -21,7 +21,8 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "leagueapi": "^0.4.20"
+    "leagueapi": "^0.4.20",
+    "lodash": "^4.13.1"
   },
   "devDependencies": {
     "nodemon": "^1.9.2",
