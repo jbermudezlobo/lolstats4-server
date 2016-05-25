@@ -7,10 +7,9 @@ var api = require('leagueapi');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ "extended" : false }));
 
-app.get('/stats2/:server/:id', function (req, res) {
+app.get('/stats/:server/:id', function (req, res) {
   var server = req.params.server;
   var id = req.params.id;
-
   var result = {
     error: false,
     token: "dd",
@@ -27,12 +26,15 @@ app.get('/stats2/:server/:id', function (req, res) {
       champs: null
     }
   };
-
   api.init(getkey(), server);
-  Promise.all([
+
+  var requests = [
     api.getLeagueEntryData(id),
     api.ChampionMastery.getTopChampions(id, 3)
-  ]).then(function (_data) {
+  ];
+
+  Promise.all(requests)
+  .then(function (_data) {
     result.stats.name = _data[0][id][0].entries[0].playerOrTeamName;
     result.stats.tier = _data[0][id][0].tier;
     result.stats.division = _data[0][id][0].entries[0].division;
@@ -42,9 +44,11 @@ app.get('/stats2/:server/:id', function (req, res) {
     result.stats.champs = _data[1];
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.json(result);
+  }, function (error) {
+    res.json({ error: true });
   });
 
 });
 
-app.listen(3000);
+app.listen(7215);
 console.log("Listening to PORT 3000");
